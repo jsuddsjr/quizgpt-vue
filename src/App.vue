@@ -1,5 +1,14 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
+
+import axios from 'axios'
+import { ref, onMounted } from 'vue';
+const info = ref('')
+onMounted(() => {
+  axios
+    .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+    .then(response => (info.value = response.data))
+})
 </script>
 
 <template>
@@ -12,6 +21,7 @@ import HelloWorld from './components/HelloWorld.vue'
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
+  <pre>{{ info }}</pre>
 </template>
 
 <style scoped>
@@ -21,9 +31,11 @@ import HelloWorld from './components/HelloWorld.vue'
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
