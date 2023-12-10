@@ -39,11 +39,12 @@ const logout = async () => {
         const res = await axiosClient.get(LOGOUT_URL)
         console.log(res.status, res.data)
     } catch (ex) {
-        if (isAxiosError(ex) && ex.response?.status === 401) {
+        if (isAxiosError(ex) && ex.response!.status > 400 && ex.response!.status < 500) {
             console.log("Logged out.")
             email.value = ""
+        } else {
+            console.log(ex)
         }
-        console.log(ex)
     }
 }
 </script>
