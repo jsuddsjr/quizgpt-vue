@@ -32,14 +32,16 @@ export default {
         }
     },
     computed: {
-        getAge(_: MouseEvent) {
-            fetch('https://api.agify.io/?name=' + this.search)
-                .then(response => response.json())
-                .then(data => {
-                    this.age = data.age
-                    this.firstName = data.name
-                    this.search = ""
-                })
+        getAge() {
+            return (_: MouseEvent) => {
+                fetch('https://api.agify.io/?name=' + this.search)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.age = data.age
+                        this.firstName = data.name
+                        this.search = ""
+                    })
+            }
         }
     }
 }

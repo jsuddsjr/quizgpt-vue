@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
+import LoginForm from './components/LoginForm.vue';
 
-import axios from 'axios'
+import axios from './plugins/axios'
 import { ref, onMounted } from 'vue';
 const info = ref('')
 onMounted(() => {
@@ -12,6 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <LoginForm />
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />

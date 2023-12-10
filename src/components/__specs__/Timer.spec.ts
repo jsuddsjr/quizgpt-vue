@@ -1,12 +1,6 @@
-import { describe, it, expect, test } from "vitest"
+import { describe, it, expect } from "vitest"
 import { mount } from "@vue/test-utils"
 import Timer from "../Timer.vue"
-
-function delay(second: number) {
-    return new Promise(resolve => {
-        setTimeout(resolve, second * 1000);
-    });
-}
 
 describe("Timer", () => {
     it("mounts", () => {
