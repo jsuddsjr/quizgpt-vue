@@ -7,7 +7,12 @@ import axiosClient from "../plugins/axiosClient"
 const username = ref("")
 const password = ref("")
 const csrfmiddlewaretoken = ref("")
-const email = ref("")
+const userModel = ref<UserModel>()
+
+const emit = defineEmits<{
+    logged_on: [value: UserModel]
+    logged_off: []
+}>()
 
 const LOGIN_URL = "/accounts/login/?next=/api/me"
 const LOGOUT_URL = "/accounts/logout/?next=/api/me"
@@ -28,7 +33,10 @@ const login = async () => {
             password: password.value
         })
         console.log(res.status, res.data)
-        email.value = res.data.email
+        if (res.data.email !== undefined) {
+            userModel.value = res.data as UserModel
+            emit('logged_on', res.data)
+        }
     } catch (ex) {
         console.log(ex)
     }
@@ -41,7 +49,8 @@ const logout = async () => {
     } catch (ex) {
         if (isAxiosError(ex) && ex.response!.status > 400 && ex.response!.status < 500) {
             console.log("Logged out.")
-            email.value = ""
+            emit('logged_off')
+            userModel.value = undefined
         } else {
             console.log(ex)
         }
@@ -50,13 +59,13 @@ const logout = async () => {
 </script>
 
 <template>
-    <form @submit.prevent="login" v-if="!email">
-        <input v-model="username" placeholder="username">
-        <input v-model="password" placeholder="password" type="password">
-        <input type="submit" value="log in">
+    <form class="d-flex" @submit.prevent="login" v-if="!userModel">
+        <input class="form-control" v-model="username" placeholder="username">
+        <input class="form-control me-2" v-model="password" placeholder="password" type="password">
+        <input class="btn btn-primary" type="submit" value="log in">
     </form>
-    <form @submit.prevent="logout" v-else>
-        <span>{{ email }}</span>
-        <input type="submit" value="log out">
+    <form class="d-flex" @submit.prevent="logout" v-else>
+        <span class="navbar-text me-2">{{ userModel.email }}</span>
+        <input class="btn btn-secondary" type="submit" value="log out">
     </form>
 </template>

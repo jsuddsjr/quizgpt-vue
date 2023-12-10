@@ -1,14 +1,25 @@
 <script setup lang="ts">
 import Counter from './Counter.vue'
+import Timer from './Timer.vue';
 
 defineProps<{ msg: string }>()
+
+const logNumber = (value: number) => {
+  console.log(value)
+}
+
+const popup = () => {
+  // alert("Timer expired!")
+}
 
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
 
-  <Counter />
+  <Counter @change="logNumber" />
+
+  <Timer class="btn btn-secondary" :seconds="180" @change="logNumber" @timeout="popup" />
 
   <p>
     Edit
@@ -30,5 +41,12 @@ defineProps<{ msg: string }>()
 <style scoped>
 .read-the-docs {
   color: #888;
+}
+
+.boxed {
+  display: inline-block;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  padding: .6em 1.2em;
 }
 </style>

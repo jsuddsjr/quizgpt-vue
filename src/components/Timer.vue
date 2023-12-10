@@ -6,6 +6,7 @@ const props = defineProps<TimerProps>()
 const remaining = ref(props.seconds)
 
 const emit = defineEmits<{
+    change: [value: number]
     timeout: []
 }>()
 
@@ -14,6 +15,7 @@ let timer: NodeJS.Timeout | undefined
 const tick = () => {
     if (remaining.value > 0) {
         remaining.value--
+        emit('change', remaining.value)
         if (remaining.value == 0) {
             clearInterval(timer)
             emit("timeout")

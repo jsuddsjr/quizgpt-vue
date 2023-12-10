@@ -12,7 +12,7 @@ function handleClick(_: MouseEvent) {
 
 <template>
     <div class="card">
-        <button type="button" @click="handleClick">count is {{ count }}</button>
+        <button class="btn btn-primary" type="button" @click="handleClick">count is {{ count }}</button>
     </div>
 </template>
 

@@ -3,12 +3,9 @@
 </script>
 
 <template>
-    <Suspense>
-        <template #default>
-
-        </template>
-        <template #fallback>
-            <loading-gears />
-        </template>
-    </Suspense>
+    <div class="row flex-grow-1 justify-content-center align-content-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
 </template>

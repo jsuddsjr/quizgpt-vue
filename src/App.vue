@@ -1,29 +1,30 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import LoginForm from './components/LoginForm.vue';
+import NavBar from './components/NavBar.vue';
+import Transition from 'vue-router'
 
 import axios from 'axios'
 import { ref, onMounted } from 'vue';
 const info = ref('')
-onMounted(() => {
-  axios
-    .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-    .then(response => (info.value = response.data))
+onMounted(async () => {
+  const response = await axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+  info.value = response.data
 })
 </script>
 
 <template>
-  <LoginForm />
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-  <pre>{{ info }}</pre>
+  <nav-bar />
+  <router-view v-slot="{ Component, route }">
+    <template v-if="Component">
+      <transition name="fade" mode="out-in">
+        <main class="container d-flex flex-grow-1">
+          <keep-alive>
+            <component :is="Component" :key="route.path"></component>
+          </keep-alive>
+        </main>
+      </transition>
+    </template>
+  </router-view>
+  <pre class="d-none">{{ info }}</pre>
 </template>
 
 <style scoped>

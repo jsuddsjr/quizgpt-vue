@@ -8,7 +8,8 @@
 
         </div><br><br>
         <label> Enter First Name </label><br>
-        <input type="text" v-model="search" style="font-size:20px;border-radius:10px;" placeholder=" Name ..."> <br> <br>
+        <input type="text" v-model="search" style="font-size:20px;border-radius:10px;" placeholder=" Name ..."> <br>
+        <br>
         <button type="button" @click="getAge">Guess Age</button>
         <br> <br> <br>
         <input type="radio" value="pop"> <label>Save my data</label>
