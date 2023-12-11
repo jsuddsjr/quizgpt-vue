@@ -37,21 +37,21 @@ Here are few ways to start a new Vue project.
 
 - `npm create vue`
 
-  This is the official Vue project scaffolding tool. You can optionally install support for TypeScript, JSX, Vue Router, Pinia (state management), Vitest (unit testing), Cypress/Nightwatch/Playwright (E2E testing), ESLint, and/or Prettier.
+  [This is the official Vue project scaffolding tool](https://vuejs.org/guide/quick-start.html). You can optionally install support for TypeScript, JSX, Vue Router, Pinia (state management), Vitest (unit testing), Cypress/Nightwatch/Playwright (E2E testing), ESLint, and/or Prettier.
 
 - `npm create vite`
 
-  Vite is lightweight bundler replacement for Webpack that is optimized for speed. It provides a very basic Vue template for TypeScript that includes Vitest for unit testing.
+  [Vite](https://vitejs.dev/) is lightweight bundler replacement for Webpack that is optimized for speed. It provides a very basic Vue template for TypeScript that includes Vitest for unit testing.
 
   > I started this project with Vite, but I would definitely use Nuxt next time.
 
 - `npm create vuetify`
 
-  Vuetify is beautifully designed, component-rich framework based on Vue. This could be a great place to start building your website, if you're willing to shell out a few bucks for the starter template. (Additional themes are available for $50 on up.)
+  [Vuetify](https://vuetifyjs.com/en/) is beautifully designed, component-rich framework based on Vue. This could be a great place to start building your website, if you're willing to shell out a few bucks for the starter template. (Additional themes are available for $50 on up.)
 
 - `npm create nuxt-app <app-name>`
 
-  Nuxt calls itself "the Intuitive Vue Framework" and it provides file-based routing, code splitting, server-side rendering, auto-imports, data fetching, zero-config TypeScript, and build tools. During scaffolding, you can select from 15 different UI frameworks, including Vuetify, Bootstrap Vue, Tailwind CSS, and others. (Sure, you can add these packages later, but it's nice to have them configured for you.)
+  [Nuxt](https://nuxt.com/) provides file-based routing, code splitting, server-side rendering, auto-imports, data fetching, zero-config TypeScript, and build tools. During scaffolding, you can select from 15 different UI frameworks, including Vuetify, Bootstrap Vue, Tailwind CSS, and others. (Sure, you can add these packages later, but it's nice to have them configured for you.)
 
 - `npx nuxi init <app-name>`
 
