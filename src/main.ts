@@ -7,7 +7,7 @@ import { createApp } from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
 import GuessAge from "./components/GuessAge.vue";
 import Question from "./components/Question.vue";
-import { createRouter, createWebHashHistory } from "vue-router";
+import { RouteLocationNormalized, createRouter, createWebHashHistory } from "vue-router";
 import App from "./App.vue";
 
 const routes = [
@@ -15,7 +15,7 @@ const routes = [
     path: "/",
     component: HelloWorld,
     name: "home",
-    props: (route) => ({ msg: route.query.msg || "Vite + Vue" }),
+    props: (route: RouteLocationNormalized) => ({ msg: route.query.msg || "Vite + Vue" }),
   },
   { path: "/guess", component: GuessAge, name: "guess" },
   { path: "/question", component: Question, name: "question" },

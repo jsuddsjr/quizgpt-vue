@@ -3,7 +3,11 @@
         "axios",
         "csrfmiddlewaretoken",
         "csrftoken",
+        "Nightwatch",
+        "nuxt",
+        "Pinia",
         "quizgpt",
-        "Vite"
+        "vite",
+        "vuetify"
     ]
 }
