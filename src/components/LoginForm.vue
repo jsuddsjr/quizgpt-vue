@@ -18,7 +18,7 @@ const LOGIN_URL = "/accounts/login/?next=/api/me"
 const LOGOUT_URL = "/accounts/logout/?next=/api/me"
 
 const refreshToken = async () => {
-    const res = await axiosClient.get(LOGIN_URL)
+    const res = await axiosClient.get<string>(LOGIN_URL)
     const doc = new DOMParser().parseFromString(res.data, "text/html")
     const input = doc.querySelector("input[name=csrfmiddlewaretoken]") as HTMLInputElement
     csrfmiddlewaretoken.value = input.value;

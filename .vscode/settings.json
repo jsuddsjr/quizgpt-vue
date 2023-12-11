@@ -4,6 +4,7 @@
         "csrfmiddlewaretoken",
         "csrftoken",
         "Nightwatch",
+        "nuxi",
         "nuxt",
         "Pinia",
         "quizgpt",

@@ -8,12 +8,4 @@ const apiClient: AxiosInstance = axios.create({
     withCredentials: true
 });
 
-// apiClient.interceptors.request.use(config => {
-//     const cookies = Cookies.get()
-//     for (let c in cookies) {
-//         config.headers.set('Cookie', `${c}=${cookies[c]}`)
-//     }
-//     return config;
-// })
-
 export default apiClient;

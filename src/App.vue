@@ -16,7 +16,7 @@ onMounted(async () => {
   <router-view v-slot="{ Component, route }">
     <template v-if="Component">
       <transition name="fade" mode="out-in">
-        <main class="container d-flex flex-grow-1">
+        <main class="container d-flex flex-grow-1 flex-column">
           <keep-alive>
             <component :is="Component" :key="route.path"></component>
           </keep-alive>
