@@ -61,6 +61,14 @@ Here are few ways to start a new Vue project.
 
 My goal for this project was to update the UI of a Django project that I built a few weeks ago. However, most of the API required me to be logged in with my Django user account, which meant I needed to send my credentials to Django so it could send back a Session ID.
 
+Here's what the completed feature looks like.
+
+![Alt text](attachments/simple_login_form.png)
+
+Then, after entering my password, I display the current user's email address from Django.
+
+![Alt text](attachments/simple_login_form_authenticated.png)
+
 I first tried creating an open API endpoint to accept my credentials; however, I soon ran into trouble using those credentials to create a token and session that could be used in subsequent requests. So, I decided to use the standard endpoint to POST my login request, just as if I had entered my credentials into the default login form myself. Additionally, I needed to know if the login was accepted, so I redirect the request after login to an API endpoint that would return details for the current user.
 
 ```
@@ -68,6 +76,12 @@ http://localhost:3000/accounts/login/?next=/api/me
 ```
 
 Here's how I made it work. 👇
+
+### Start the Django service
+
+I am using my "QuizGPT" service (https://github.com/jsuddsjr/quizgpt) as my backend, so I put them together into one workspace in VS Code. Then, to start the server, I press `Ctrl+Shift+B` (default build task), or you can type `python.exe manage.py runserver` into the terminal window.
+
+Make sure the service is launched before attempting to log in.
 
 ### Cross-Origin Resource Sharing (CORS)
 

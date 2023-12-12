@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import NavBar from './components/NavBar.vue';
-import Transition from 'vue-router'
+import NavBar from "./components/NavBar.vue";
+import Transition from "vue-router";
 
-import axios from 'axios'
-import { ref, onMounted } from 'vue';
-const info = ref('')
+import axios from "axios";
+import { ref, onMounted } from "vue";
+const info = ref("");
 onMounted(async () => {
-  const response = await axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
-  info.value = response.data
-})
+  const response = await axios.get(
+    "https://api.coindesk.com/v1/bpi/currentprice.json"
+  );
+  info.value = response.data;
+});
 </script>
 
 <template>
@@ -16,7 +18,9 @@ onMounted(async () => {
   <router-view v-slot="{ Component, route }">
     <template v-if="Component">
       <transition name="fade" mode="out-in">
-        <main class="container d-flex flex-grow-1 flex-column">
+        <main
+          class="container d-flex flex-column flex-grow-1"
+        >
           <keep-alive>
             <component :is="Component" :key="route.path"></component>
           </keep-alive>

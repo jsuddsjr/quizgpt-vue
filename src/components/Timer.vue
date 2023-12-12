@@ -1,41 +1,63 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue"
-import { TimerProps, toTimeString } from '../types/Timer'
+import { ref, onMounted, onUnmounted } from "vue";
+import { TimerProps, toTimeString } from "../types/Timer";
 
-const props = defineProps<TimerProps>()
-const remaining = ref(props.seconds)
+const props = defineProps<TimerProps>();
+const remaining = ref(0);
+const timer = ref<NodeJS.Timeout | undefined>();
 
 const emit = defineEmits<{
-    change: [value: number]
-    timeout: []
-}>()
+  tick: [value: number, maxValue: number];
+  timeout: [elapsed: number];
+}>();
 
-let timer: NodeJS.Timeout | undefined
+const _tick = () => {
+  if (remaining.value > 0) {
+    remaining.value--;
+    emit("tick", remaining.value, props.seconds);
+  } else {
+    pause();
+    emit("timeout", props.seconds);
+  }
+};
 
-const tick = () => {
-    if (remaining.value > 0) {
-        remaining.value--
-        emit('change', remaining.value)
-        if (remaining.value == 0) {
-            clearInterval(timer)
-            emit("timeout")
-        }
-    }
-}
+const start = () => {
+  if (remaining.value === 0) {
+    remaining.value = props.seconds;
+  }
+  emit("tick", remaining.value, props.seconds);
+  timer.value = setInterval(_tick, 1000);
+};
 
-defineExpose({ tick })
+const pause = () => {
+  if (timer.value) {
+    clearInterval(timer.value);
+    timer.value = undefined;
+  }
+};
+
+const reset = () => {
+  remaining.value = props.seconds;
+};
+
+defineExpose({ start, pause, reset });
 
 onMounted(() => {
-    timer = setInterval(tick, 1000)
-})
+  reset();
+});
 
 onUnmounted(() => {
-    clearInterval(timer)
-})
+  pause();
+});
 </script>
 
 <template>
-    <div>{{ toTimeString(remaining) }}</div>
+  <div class="input-group input-group-lg my-3">
+    <span class="input-group-text">{{ toTimeString(remaining) }}</span>
+    <button class="btn btn-danger" v-if="timer" @click="pause">Pause</button>
+    <button class="btn btn-success" v-else @click="start">Start</button>
+    <button class="btn btn-outline-secondary" @click="reset">Reset</button>
+  </div>
 </template>
 
 <style lang="css"></style>

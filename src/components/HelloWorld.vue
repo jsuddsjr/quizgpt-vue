@@ -1,41 +1,77 @@
 <script setup lang="ts">
-import Counter from './Counter.vue'
-import Timer from './Timer.vue';
+import { ref } from "vue";
+import Counter from "./Counter.vue";
+import Timer from "./Timer.vue";
 
-defineProps<{ msg: string }>()
+const progress = ref(0);
+const percentage = ref(0);
+
+defineProps<{ msg: string }>();
 
 const logNumber = (value: number) => {
-  console.log(value)
-}
+  console.log(value);
+};
 
-const popup = () => {
-  // alert("Timer expired!")
-}
+const timedOut = (elapsed: number) => {
+  console.log(`${elapsed} seconds elapsed`);
+};
 
+const updateProgress = (value: number, maxValue: number) => {
+  progress.value = maxValue - value;
+  percentage.value = Math.round((value * 100) / maxValue);
+  console.log(value);
+};
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <section>
+    <h1>{{ msg }}</h1>
 
-  <Counter @change="logNumber" />
+    <p>
+      You can change the H1 text above by passing a "msg" parameter on the query
+      string.
+    </p>
 
-  <Timer class="btn btn-secondary" :seconds="180" @change="logNumber" @timeout="popup" />
+    <kbd>http://localhost:5173/#/?msg=Test</kbd>
 
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test HMR
-  </p>
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank">create-vue</a>, the official Vue + Vite
-    starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+    <h2>Counter</h2>
+
+    <p>
+      Click the counter to increase its value. Each change is logged to the
+      console.
+    </p>
+
+    <Counter @change="logNumber" />
+
+    <h2>Timer</h2>
+
+    <p>
+      You configure the timer by setting the <code>:seconds</code> property on
+      the <code>Timer</code> element. Each tick is logged to the console window.
+    </p>
+
+    <kbd>
+      &lt;Timer :seconds="180" @tick="logNumber" @timeout="timedOut" /&gt;
+    </kbd>
+
+    <Timer :seconds="180" @tick="updateProgress" @timeout="timedOut" />
+
+    <p>
+      Because the timer is sending events, we can synchronize with a progress
+      bar to show the remaining time.
+    </p>
+
+    <div class="progress">
+      <div
+        class="progress-bar h-1"
+        :style="{ width: `${percentage}%` }"
+        role="progressbar"
+        :aria-valuenow="progress"
+        aria-valuemin="0"
+        aria-valuemax="300"
+      ></div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
@@ -47,6 +83,6 @@ const popup = () => {
   display: inline-block;
   background-color: #1a1a1a;
   border-radius: 8px;
-  padding: .6em 1.2em;
+  padding: 0.6em 1.2em;
 }
 </style>
