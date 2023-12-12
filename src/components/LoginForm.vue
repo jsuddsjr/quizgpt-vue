@@ -2,12 +2,15 @@
 import { isAxiosError } from "axios";
 import { ref } from "vue";
 import { UserModel } from "../types/UserModel";
+import useUserStore from "../stores/userStore";
 import axiosClient from "../plugins/axiosClient";
 
 const username = ref("");
 const password = ref("");
 const csrfmiddlewaretoken = ref("");
 const userModel = ref<UserModel>();
+
+const store = useUserStore();
 
 const emit = defineEmits<{
   logged_on: [value: UserModel];
@@ -37,6 +40,7 @@ const login = async () => {
     console.log(res.status, res.data);
     if (res.data.email !== undefined) {
       userModel.value = res.data as UserModel;
+      store.register(res.data);
       emit("logged_on", res.data);
     }
   } catch (ex) {
@@ -56,6 +60,7 @@ const logout = async () => {
     ) {
       console.log("Logged out.");
       emit("logged_off");
+      store.register(null);
       userModel.value = undefined;
     } else {
       console.log(ex);

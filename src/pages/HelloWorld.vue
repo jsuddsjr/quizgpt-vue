@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import Counter from "./Counter.vue";
-import Timer from "./Timer.vue";
+import useUserStore from "../stores/userStore";
+import Counter from "../components/Counter.vue";
+import Timer from "../components/Timer.vue";
 
 const progress = ref(0);
 const percentage = ref(0);
 
 defineProps<{ msg: string }>();
+
+const store = useUserStore();
 
 const logNumber = (value: number) => {
   console.log(value);
@@ -33,6 +36,22 @@ const updateProgress = (value: number, maxValue: number) => {
     </p>
 
     <kbd>http://localhost:5173/#/?msg=Test</kbd>
+
+    <h2>User store</h2>
+
+    <p>
+      When you are logged in, your user information will be saved to application
+      state.
+    </p>
+
+    <p class="fs-1 text-success" v-if="store.user">
+      Welcome,
+      <span v-if="store.first_name || store.last_name"
+        >{{ store.first_name }} {{ store.last_name }}</span
+      ><span v-else>{{ store.email }}</span
+      >!
+    </p>
+    <p class="fs-1 text-danger" v-else>You are not logged in.</p>
 
     <h2>Counter</h2>
 

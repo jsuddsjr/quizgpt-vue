@@ -40,7 +40,7 @@ const reset = () => {
   remaining.value = props.seconds;
 };
 
-defineExpose({ start, pause, reset });
+defineExpose({ start, pause, reset, _tick });
 
 onMounted(() => {
   reset();

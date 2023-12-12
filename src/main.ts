@@ -4,16 +4,18 @@ import "bootstrap";
 
 // import './style.css'
 import { createApp } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
-import GuessAge from "./components/GuessAge.vue";
-import Question from "./components/Question.vue";
+import { createPinia } from "pinia";
+import App from "./App.vue";
+import Factorial from "./pages/Factorial.vue";
+import GuessAge from "./pages/GuessAge.vue";
+import HelloWorld from "./pages/HelloWorld.vue";
+import Question from "./pages/Question.vue";
+
 import {
   RouteLocationNormalized,
   createRouter,
   createWebHashHistory,
 } from "vue-router";
-import App from "./App.vue";
-import Factorial from "./components/Factorial.vue";
 
 const routes = [
   {
@@ -34,5 +36,6 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
+const pinia = createPinia();
 
-createApp(App).use(router).mount("#app");
+createApp(App).use(pinia).use(router).mount("#app");
