@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import useUserStore from "../stores/userStore";
 import axiosClient from "../plugins/axiosClient";
 
@@ -7,7 +7,7 @@ const info = ref("");
 
 const store = useUserStore();
 
-store.$subscribe(async (mutation, state) => {
+store.$subscribe(async (_mutation, _state) => {
   if (store.user) {
     const response = await axiosClient.get<string>("/api/me");
     info.value = response.data;

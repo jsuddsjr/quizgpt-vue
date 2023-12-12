@@ -10,13 +10,13 @@ This "language, type checker, and transpiler rolled into one" adjunct to JavaScr
 
 In case you hadn't heard, we are ringing out support for Vue 2 along with the rest of 2023. The next version of Vue adds new features like Suspense (fallback templates for asynchronous loading), Teleport (ability to display parts of a component anywhere on the screen), improved performance, life cycle hooks, and more.
 
-> HERE'S THE KEY: Vue 3 introduces the **Composition API**. _Learn to recognize it._ There's a lot of old sample code out there, but you want the new stuff.
+> HERE'S THE KEY 🗝️: Vue 3 introduces the **Composition API**. _Learn to recognize it._ There's a lot of old sample code out there, but you want the new stuff.
 
 I recently began working with a legacy app written for Vue 2, so I wanted to see how a similar app might be designed using the newer Composition API. Also, I decide to reuse [a REST API I had written with Django](https://github.com/jsuddsjr/quizgpt) as my backend service.
 
 As always, here's a video link for a quick demo.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/iZevF39oPJI)
 
 # Development Environment
 
