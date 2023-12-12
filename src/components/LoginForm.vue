@@ -40,7 +40,7 @@ const login = async () => {
     console.log(res.status, res.data);
     if (res.data.email !== undefined) {
       userModel.value = res.data as UserModel;
-      store.register(res.data);
+      store.$patch({ user: res.data });
       emit("logged_on", res.data);
     }
   } catch (ex) {
@@ -60,7 +60,7 @@ const logout = async () => {
     ) {
       console.log("Logged out.");
       emit("logged_off");
-      store.register(null);
+      store.$patch({ user: null });
       userModel.value = undefined;
     } else {
       console.log(ex);

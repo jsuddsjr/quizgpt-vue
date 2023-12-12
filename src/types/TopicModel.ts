@@ -1,3 +1,5 @@
+import { QuestionModel } from "./QuestionModel";
+
 export interface TopicModel {
   id: number;
   slug: string;
@@ -9,15 +11,7 @@ export interface TopicModel {
   user: number;
   modified: string;
   created: string;
-  questions: Array<{
-    id: number;
-    question: number;
-    choice_text: string;
-    order: number;
-    is_correct: boolean;
-    modified: string;
-    created: string;
-  }>;
+  questions: Array<QuestionModel>;
 }
 
 /*
